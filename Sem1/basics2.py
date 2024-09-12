@@ -33,7 +33,8 @@ print(name.isdigit())  # False
 # We can also index a string with square brackets
 print(name[0])  # J
 print(name[1:])  # ohn
-print(name[:-1])  # Joh
+print(name[2:-1])  # h
+print(name[::2])  # Jh
 
 # === Booleans ===
 # Booleans (bool) can be either True or False
