@@ -16,9 +16,6 @@ print("Anything", "at", "All")  # Anything at All
 print(1 + 2)  # 3
 print(3 - 4.5)  # -1.5
 print(5 * 6)  # 30
-print(7 / 8)  # 0.875
-print(10 / 9)  # 1.1111111111111112
-print(10 // 9)  # 1
 # We can also print the variables
 print(name)  # Bob
 print(age)  # 20
