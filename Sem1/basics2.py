@@ -31,6 +31,7 @@ print(name.count("o"))  # 1
 print(name.isascii())  # True
 print(name.isdigit())  # False
 # We can also index a string with square brackets
+# Indexing starts and 0
 print(name[0])  # J
 print(name[1:])  # ohn
 print(name[2:-1])  # h
