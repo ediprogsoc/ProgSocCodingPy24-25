@@ -2,10 +2,11 @@
 
 # === Types ===
 # There are 4 main data types: str, int, bool, float
-name = "Bob"
-age = 20
-alive = True
-money = 3.45
+# type annotations are useful but optional
+name: str = "Bob"
+age: int = 20
+alive: bool = True
+money: float = 3.45
 
 # === Basic Output ===
 # We can print out some text to the console
