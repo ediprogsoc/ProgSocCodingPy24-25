@@ -1,4 +1,4 @@
-import random
+import randomStuff
 
 low: int = 1
 high: int = 10

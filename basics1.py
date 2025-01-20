@@ -11,7 +11,7 @@ money: float = 3.45
 # === Basic Output ===
 # We can print out some text to the console
 print("Hello World!")  # Hello World!
-print("Anything", "at", "All")  # Anything at All
+print("Print", "anything", "at", "all")  # Print anything at All
 # We can also do arithmatic
 print(1 + 2)  # 3
 print(3 - 4.5)  # -1.5

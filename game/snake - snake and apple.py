@@ -1,4 +1,4 @@
-import random
+import randomStuff
 
 import pygame
 
