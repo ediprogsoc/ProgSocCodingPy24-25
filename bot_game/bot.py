@@ -3,17 +3,17 @@ from time import sleep
 from typing import Callable
 from copy import deepcopy
 
-type History = tuple[list[bool], list[bool]]
-type Bot = Callable[[History], bool]
+type History = list[bool]
+type Bot = Callable[[History, History], bool]
 type Results = dict[str, list[int]]
 
 def do_rename(s: str) -> str:
     return s.replace(" ", "").replace("-", "_").replace("(", "_").replace(")", "")
 
 
-def get_all_bots() -> dict[str, Bot]:
+def get_all_bots(test=False) -> dict[str, Bot]:
     bots = {}
-    path = os.path.join(os.getcwd(), "bots")
+    path = os.path.join(os.getcwd(), "bots" if not test else "example")
     for file in os.listdir(path):
         if not file.endswith(".py"):
             continue
@@ -43,13 +43,13 @@ def get_all_bots() -> dict[str, Bot]:
 def handle_scoring(r1: bool, r2: bool, wins: list[int]) -> tuple[int, int] | None:
     win = 5
     draw_coop = 3
-    draw_deff = 1
+    draw_defr = 1
     lose = 0
     match (int(r1), int(r2)):
         case (1, 1):
             return draw_coop, draw_coop
         case (0, 0):
-            return draw_deff, draw_deff
+            return draw_defr, draw_defr
         case (1, 0):
             wins[1] += 1
             return lose, win
@@ -59,23 +59,18 @@ def handle_scoring(r1: bool, r2: bool, wins: list[int]) -> tuple[int, int] | Non
     return None
 
 
-def add_to_history(history: History, r1: bool, r2: bool) -> None:
-    history[0].append(r1)
-    history[1].append(r2)
-
-
 def fight_bots(func1: Bot, func2: Bot, n: int) -> tuple[tuple[int, int], list[int]] | tuple[tuple[int | None, int | None], list[int]]:
     history: History = [], []
     score: tuple[int, int] = 0, 0
     wins: list[int] = [0, 0]
     i: int = 0
     while i < n:
-        r1: bool | None = func1(history1)
-        r2: bool | None = func2(history2)
+        r1: bool | None = func1(history[0], history[1])
+        r2: bool | None = func2(history[1], history[2])
         if r1 is None or r2 is None:
             return (r1, r2), wins
-        add_to_history(history1, r1, r2)
-        add_to_history(history2, r2, r1)
+        history[0].append(r1)
+        history[1].append(r2)
         result: tuple[int, int] = handle_scoring(r1, r2, wins)
         score = score[0] + result[0], score[1] + result[1]
         i += 1
@@ -85,7 +80,6 @@ def fight_bots(func1: Bot, func2: Bot, n: int) -> tuple[tuple[int, int], list[in
 def fight_all_bots(bots: dict[str, Bot], n: int = 50) -> Results:
     names = list(bots.keys())
     results = {}
-    sleep(0.3)
     print()
     max_num = len(str(len(names) * len(names) // 2))
     battles = 1
