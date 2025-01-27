@@ -5,8 +5,5 @@ def decision_function(my_history: list[bool], opponent_history: list[bool]) -> b
     :param opponent_history: List of booleans containing your opponent's past decisions against your bot.
     :return: Should this bot co-operate or defer (True to co-operate, False to defer)?
     """
-    decision = None
-    # Write Your code here
 
-    ...
-    return decision
+    return True

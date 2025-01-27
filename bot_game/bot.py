@@ -66,7 +66,7 @@ def fight_bots(func1: Bot, func2: Bot, n: int) -> tuple[tuple[int, int], list[in
     i: int = 0
     while i < n:
         r1: bool | None = func1(history[0], history[1])
-        r2: bool | None = func2(history[1], history[2])
+        r2: bool | None = func2(history[1], history[0])
         if r1 is None or r2 is None:
             return (r1, r2), wins
         history[0].append(r1)
@@ -143,4 +143,3 @@ if __name__ == '__main__':
     results = fight_all_bots(bots, n=100)
     print_result(results, True)
     print_result(results)
-    print(results)
